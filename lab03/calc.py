@@ -1,5 +1,12 @@
 a = float(input())
 b = float(input())
-print('сумма = ', a + b)
-print('разность = ' a - b)
-print('произведение = ' a * b)
+op = input()
+
+if op == '+':
+	print('сумма = ', a + b)
+if op == '-':
+	print('разность = ' a - b)
+if op == '*':
+	print('произведение = ' a * b)
+if op == '/':
+	print('деление = ' a / b)
