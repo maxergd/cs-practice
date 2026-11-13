@@ -1,6 +1,6 @@
 def parse_event(line):
     line = line.strip()
-    parts = line.split(" ", 2)
+    parts = line.split(maxsplit=2)
     if len(parts) != 3:
         raise ValueError("В строке меньше трёх частей")
 
@@ -15,6 +15,7 @@ def parse_event(line):
         raise ValueError("Незнакомый уровень")
 
     return {"time": time_str, "level": level, "message": message}
+
 
 def count_levels(lines):
     counts = {}
@@ -50,6 +51,7 @@ def top_errors(lines, n):
     items.sort(key=lambda x: (-x[1], x[0]))
     return items[:n]
 
+
 def format_report(counts, errors):
     lines = ["Отчёт по журналу", ""]
 
@@ -63,4 +65,5 @@ def format_report(counts, errors):
             lines.append(f"- {msg} - {count}")
 
     return "\n".join(lines) + "\n"
+
 
