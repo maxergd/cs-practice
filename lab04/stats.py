@@ -6,6 +6,7 @@ def parse_record(line):
     city, temp, date = parts
     city = city.strip()
     date = date.strip()
+    temp = temp.strip().replace(',', '.')
 
     if len(city) == 0 or len(date) == 0:
         raise ValueError('Пустая дата или город')
@@ -15,7 +16,7 @@ def parse_record(line):
     except ValueError:
         raise ValueError("Температура не число")
 
-    return {"city": city, "temp": temp, "date": date}
+    return {"city": city, "temperature": temp, "date": date}
 
 
 def read_valid(lines):
@@ -30,13 +31,14 @@ def read_valid(lines):
             pass
     return valid_records
 
+
 def average_by_city(records):
     totals = {}
     counts = {}
 
     for record in records:
         city = record["city"]
-        temp = record["temp"]
+        temp = record["temperature"]
         totals[city] = totals.get(city, 0) + temp
         counts[city] = counts.get(city, 0) + 1
 
@@ -58,3 +60,5 @@ def warmest_city(records):
             best_temp = averages[city]
 
     return best_city
+
+
