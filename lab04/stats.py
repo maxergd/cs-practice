@@ -29,3 +29,32 @@ def read_valid(lines):
         except ValueError:
             pass
     return valid_records
+
+def average_by_city(records):
+    totals = {}
+    counts = {}
+
+    for record in records:
+        city = record["city"]
+        temp = record["temp"]
+        totals[city] = totals.get(city, 0) + temp
+        counts[city] = counts.get(city, 0) + 1
+
+    averages = {}
+    for city in totals:
+        averages[city] = round(totals[city] / counts[city], 1)
+
+    return averages
+
+
+def warmest_city(records):
+    averages = average_by_city(records)
+    best_city = ""
+    best_temp = 0
+
+    for city in sorted(averages):
+        if best_city == "" or averages[city] > best_temp:
+            best_city = city
+            best_temp = averages[city]
+
+    return best_city
